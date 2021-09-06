@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算</title>
+    <!-- 
+        统计数组 arr 中值等于 item 的元素出现的次数
+        filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+            注意： filter() 不会对空数组进行检测。
+            注意： filter() 不会改变原始数组。
+            array.filter(function(currentValue,index,arr), thisValue)
+                -返回满足filter中条件的数组，包含了符合条件的所有元素。如果没有符合条件的元素则返回空数组。
+        forEach() 
+            array.forEach(function(currentValue, index, arr), thisValue)
+            返回值:	undefined
+     -->
+</head>
+
+<body>
+    <script>
+        // 利用filter
+        function count(arr, item) {
+            return arr.filters(
+                p=>p===item
+            ).length
+        }
+
+        // forEach
+
+        function count(arr,item){
+             var j = 0 ;
+             arr.forEach(elem=>{
+                 if(elem===item){
+                     j++;
+                 }
+             })
+             return j;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查找重复元素</title>
+    <!-- 
+        找出数组 arr 中重复出现过的元素（不用考虑返回顺序）
+        算法思路：
+        1 找到重复的元素
+        2 返回这些元素
+        lastIndexOf() 方法
+            可返回一个指定的字符串值最后出现的位置，
+            如果指定第二个参数 start，则在一个字符串中的指定位置从后向前搜索。
+            注意： 该方法将从后向前检索字符串，但返回是从起始位置 (0) 开始计算子字符串最后出现的位置。 
+            看它是否含有字符串。
+            开始检索的位置在字符串的 start 处或字符串的结尾（没有指定 start 时）。
+            如果没有找到匹配字符串则返回 -1 。
+            注意：lastIndexOf() 方法是区分大小写的！
+        数组也可以用？
+        string.lastIndexOf(searchvalue,start)
+
+        
+        sort() 方法用于对数组的元素进行排序。排序顺序可以是字母或数字，并按升序或降序。
+                默认排序顺序为按字母升序。
+            注意：当数字是按字母顺序排列时"40"将排在"5"前面。使用数字排序，你必须通过一个函数作为参数来调用。
+                函数指定数字是按照升序还是降序排列。注意： 这种方法会改变原始数组！。
+                
+            array.sort(sortfunction)
+                -sortfunction 可选。规定排序顺序。必须是函数。
+                  -数字升序 function(a,b){return a-b}
+                  -数字降序 function(a,b){return b-a}
+            返回值 对数组的引用。请注意，数组在原数组上进行排序，不生成副本
+     -->
+</head>
+
+<body>
+    <script>
+        // 方法1 indeOf 与 lastIndexOf 
+        function duplicates(arr) {
+            var res = [];
+            arr.forEach(elem => {
+                // 只输出重复的一个 注意 这里的res.indexOf(elem)!== -1就是判断res中没有检测到该数组
+                // 注意这里的lastIndexOf 的Index是大写字母开头
+               if (arr.indexOf(elem)!==arr.lastindexOf(elem) && res.indexOf(elem)== -1 ) {
+                   res.push(elem);
+               }
+            });
+            return res;
+        }
+
+        // 方法2 自己创 filter + indexOf
+        function duplicates(arr) {
+            var arr2 = [];
+            arr.forEach(element => {
+                if ((arr.filter(p=>p===element).length)>1 &&arr2.indexOf(element)==-1) {
+                    arr2.push(element);
+                }
+            });
+            return arr2;
+        }
+
+        //3 sort() + filter  利用数组排序，然后通过对比当前元素与后一个相同但与前一个不同去找到重复出现的元素：
+        function duplicates(arr) {
+            var arr3 = arr.sort();
+            // 排序后找到与前一个等，后一个不等的过滤出来输出   例如  1 1 2 2 3 4 4 6 
+             return arr3.filter((elem,index)=>{
+                 elem==arr3[index+1] && elem !== arr3[index-1]
+             });
+        }
+
+        // 4 用filter + index + lastIndexOf 
+        function duplicates(arr) {
+            var arr3 = arr.sort();
+            // 排序后找到与前一个等，后一个不等的过滤出来输出   例如  1 1 2 2 3 4 4 6 
+             return arr3.filter((elem,index)=>{
+                 elem==arr3[index+1] && elem !== arr3[index-1]
+             });
+        }
+        
+    </script>
+</body>
+
+</html>
