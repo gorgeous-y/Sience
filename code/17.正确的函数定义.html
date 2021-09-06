@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正确的函数定义</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        错误代码如下
+            这道题是考函数声明与函数表达式的区别。
+            原题的写法，是在两个逻辑分支里面各有一个函数声明，
+            但是对于函数声明，解析器会率先读取并且让其在执行任何代码前可用
+            意思就是别的代码还没运行呢，两个getValue声明已经被读取，
+            所以总是执行最新的那个。
+
+            函数表达式，当解析器执行到它所在的代码行时，才会真正被解释执行，
+            所以两个逻辑分支可以分别执行
+
+            //函数声明式 解析器会率先读取并且让其在执行任何代码前可用 所以总是执行最新的那个。
+                function greeting(){
+                        console.log("hello world");  
+                }
+
+            //函数表达式 当解析器执行到它所在的代码行时，才会真正被解释执行，
+                var greeting = function(){
+                        console.log("hello world"); 
+                }
+        */
+
+        // 错误语法 混淆了函数表达式和函数声明
+        function functions(flag) {
+            var getvalue = null;
+            if (flag) {
+                // 函数声明 总是先声明后调用 执行的是最新的 永远输出b
+                function getValue() { return 'a'; }
+            } else {
+                function getValue() { return 'b'; }
+            }
+
+            return getValue();
+        }
+
+        function functions(flag) {
+            var getValue = null;
+            if (flag) {
+                // 函数表达式 执行到此才调用 各自调用各自的
+                getValue = function () { return 'a'; }
+            } else {
+                getValue = function () { return 'b'; }
+            }
+
+            return getValue();
+        }
+    </script>
+</body>
+
+</html>

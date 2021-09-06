@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原数组数学变换后的新数组</title>
+    <!-- 
+        1 for in 遍历后赋值
+        2 map()方法
+            map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值。
+            map() 方法按照原始数组元素顺序依次处理元素。
+            注意： map() 不会对空数组进行检测。
+            注意： map() 不会改变原始数组。
+            array.map(function(currentValue,index,arr), thisValue)
+
+            Math 方法
+                abs(x)	返回 x 的绝对值。
+                acos(x)	返回 x 的反余弦值。
+                asin(x)	返回 x 的反正弦值。
+                atan(x)	以介于 -PI/2 与 PI/2 弧度之间的数值来返回 x 的反正切值。
+                atan2(y,x)	返回从 x 轴到点 (x,y) 的角度（介于 -PI/2 与 PI/2 弧度之间）。
+                ceil(x)	对数进行上舍入。
+                cos(x)	返回数的余弦。
+                exp(x)	返回 Ex 的指数。
+                floor(x)	对 x 进行下舍入。
+                log(x)	返回数的自然对数（底为e）。
+                max(x,y,z,...,n)	返回 x,y,z,...,n 中的最高值。
+                min(x,y,z,...,n)	返回 x,y,z,...,n中的最低值。
+                pow(x,y)	返回 x 的 y 次幂。
+                random()	返回 0 ~ 1 之间的随机数。
+                round(x)	四舍五入。
+                sin(x)	返回数的正弦。
+                sqrt(x)	返回数的平方根。
+                tan(x)	返回角的正切。
+     -->
+</head>
+
+<body>
+    <script>
+        // 1
+        function square(arr) {
+            let res = [];
+            for (var elem in arr) {
+
+                res.push(arr[elem] * arr[elem]);
+            }
+            return res
+        }
+        // 2 map()
+        function square(arr) {
+            // map里面必须是一个函数
+            return arr.map(el=>Math.pow(el,2)) 
+            //    return arr.map(el=>el*=el) 
+        }
+    </script>
+</body>
+
+</html>

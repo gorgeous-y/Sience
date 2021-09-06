@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>避免全局变量</title>
+    <!-- 
+        给定的 js 代码中存在全局变量，请修复 
+            在Javascript语言中，声明变量使用的都是关键字var，
+            如果不使用var而直接声明变量，则该变量为全局变量。
+    -->
+</head>
+
+<body>
+    <script>
+        function globals() {
+            // 加上var 或者 let 定义变量
+            var myObject = {
+                name: 'Jory'
+            };
+
+            return myObject;
+        }
+    </script>
+</body>
+
+</html>
