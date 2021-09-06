@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 获取字符串的长度</title>
+</head>
+
+<body>
+    <!-- 如果第二个参数 bUnicode255For1 === true，则所有字符长度为 1
+            否则如果字符 Unicode 编码 > 255 则长度为 2 -->
+    <script>
+        /* 使用的方法 
+            charCodeAt() 
+            返回指定位置的字符的 Unicode 编码，返回值是 0 - 65535 之间的整数，
+            表示给定索引处的 UTF-16 代码单元。
+            字符串中第一个字符的位置为 0， 第二个字符位置为 1，
+        */
+        function strLength(s, bUnicode255For1) {
+              let  length = s.length;
+            //  全部为1 直接返回长度  否则判定 编码255
+                if(!bUnicode255For1) {
+                    for (var i in s) {
+                        if (s.charCodeAt(i)>255) {
+                            length++
+                        }
+                        
+                    }
+                }
+                return length
+        }
+    </script>
+</body>
+
+</html>

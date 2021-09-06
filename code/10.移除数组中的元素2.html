@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移除数组中的元素</title>
+    <!-- 
+        移除数组 arr 中的所有值与 item 相等的元素，
+        !!直接在给定的 arr 数组上进行操作!!，并将结果返回
+        indexOf()
+        返回某个指定的字符串值在字符串中首次出现的位置。
+        如果没有找到匹配的字符串则返回 -1。
+
+        splice()
+        用于添加或删除数组中的元素。
+        注意：这种方法会改变原始数组。
+
+        array.splice(index,howmany,item1,.....,itemX)
+            -index 必需。规定从何处添加/删除元素。
+            该参数是开始插入和（或）删除的数组元素的下标，必须是数字。
+            -howmany 可选。规定应该删除多少元素。必须是数字，但可以是 "0"。
+                    如果未规定此参数，则删除从 index 开始到原数组结尾的所有元素。
+            -item1, ..., itemX  可选。要添加到数组的新元素
+     -->
+</head>
+
+<body>
+    <script>
+        function removeWithoutCopy(arr, item) {
+            // 循环直到检测不到item的存在
+            while (arr.indexOf(item)!==-1) {
+                arr.splice(arr.indexOf(item),1)
+            }
+            return arr
+        }
+    </script>
+</body>
+
+</html>

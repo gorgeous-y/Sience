@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加元素</title>
+    <!-- 
+        在数组 arr 开头添加元素 item。不要直接修改数组 arr，结果返回新的数组
+        1 unshift() 
+            unshift() 方法可向数组的开头添加一个或更多！元素！，并返回新的长度。
+            array.unshift(item1,item2, ..., itemX)
+     -->
+</head>
+
+<body>
+    <script>
+        // 方法一
+        function prepend(arr, item) {
+            let res = [item];
+            for (let i = 0; i < arr.length; i++) {
+                res.push(arr[i]);
+            }
+            return res
+        }
+
+        // 方法二 
+        function prepend(arr, item) {
+            return [item,...arr]
+        }
+
+    </script>
+</body>
+
+</html>

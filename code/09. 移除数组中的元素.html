@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移除数组中的元素</title>
+    <!-- 
+        过滤函数 filter()
+        filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+            注意： filter() 不会对空数组进行检测。
+            注意： filter() 不会改变原始数组。
+        用法:
+        array.filter(function(currentValue,index,arr), thisValue)
+            -function(currentValue,index,arr)
+                必须。函数，数组中的每个元素都会执行这个函数
+                函数参数:
+                    -currentValue 必须。当前元素的值 筛选条件(满足返回)
+                    -index 可选。当前元素的索引值
+                    -arr 可选。当前元素属于的数组对象
+            -thisValue 可选。对象作为该执行回调时使用，传递给函数，用作 "this" 的值。如果省略了 thisValue ，"this" 的值为 "undefined"
+
+    -->
+</head>
+
+<body>
+    <script>
+        //例子
+        var ages = [32, 33, 16, 40];
+
+        function checkAdult(age) {
+            return age >= 18;
+        }
+
+        function myFunction() {
+            document.getElementById("demo").innerHTML = ages.filter(checkAdult);
+        }
+
+        //案例
+        function remove(arr, item) {
+            var a = arr.filter(
+                b => { return b != item }
+            )
+            return a
+        }
+    </script>
+</body>
+
+</html>

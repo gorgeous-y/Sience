@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>根据包名，在指定空间中创建对象</title>
+</head>
+
+<body>
+    <!-- 
+        题目根据包名，在指定空间中创建对象
+        输入描述:
+            namespace({a: {test: 1, b: 2}}, 'a.b.c.d')
+        输出描述:
+            {a: {test: 1, b: {c: {d: {}}}}}
+
+        解题思路：
+        1) namespace($1, $2)
+            第一个参数是现有命名空间中的对象
+            第二个参数是需要此空间实现的结构（即对象的包含关系），可知是a包含b包含c包含d；
+        2)  首先因为题目所要求创建的空间是顺序的，所以直接通过循环，将其一个个创建即可。
+            当空间中包含对象时（如a：{test：1}）则保留此对象；
+            当包含内容不是对象时（如b：2），则将其设置为一个空对象。
+            如果不包含此空间名，则在其上一级空间中创建一个空对象。
+     -->
+
+
+    <script>
+        function namespace(oNamespace, sPackage) {
+            var res = oNamespace; //保存当前空间名
+            var arr = sPackage.split('.'); //得到[a,b,c,d]
+            // 循环空间名 并创建对象
+            for (var i = 0; i < arr.length; i++) {
+                // ===========
+
+                if (arr[i] in oNamespace) {
+
+                    //  typeof 操作符来检测变量的数据类型。
+                    //  typeof 的返回值 是一个字符串 所以要判断时候要加引号且要小写
+                    //instanceof：JavaScript操作符，会在原型链中的构造器中搜索，找到则返回true，否则返回false
+                    //使用typeof判断空间中的这个属性是否是个对象,如果不是设为空对象
+
+                    if (typeof oNamespace[arr[i]] !== "object") {
+                        oNamespace[arr[i]] = {}
+                    } else {
+                    }
+                    //如果是个对象则保留原值
+                } else {
+                    oNamespace[arr[i]] = {}
+                }
+                oNamespace = oNamespace[arr[i]]
+            }
+            return res;
+        }
+        //namespace({ a: { test: 1, b: 2 } }, 'a.b.c.d')
+        console.log(namespace({ a: { test: 1, b: 2 } }, 'b.a.c.d'))
+    </script>
+</body>
+
+</html>

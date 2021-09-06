@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组求和</title>
+</head>
+<!-- 计算数组的和
+    传统思路：遍历求和
+    简便思路：利用reduce() 方法
+     -计算数组元素相加后的总和：
+    
+     使用方法：
+     array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+        function(total,currentValue, index,arr)必需。用于执行每个数组元素的函数。
+            -total 必需。初始值, 或者计算结束后的返回值。
+            -currentValue 必需。当前元素
+            -currentIndex 可选。当前元素的索引
+            -arr 可选。当前元素所属的数组对象。
+       -initialValue 可选。传递给函数的初始值
+
+-->
+
+<body>
+    <script>
+        //例子
+        var numbers = [65, 44, 12, 4];
+
+        function getSum(total, num) {
+            return total + num;
+        }
+        function myFunction(item) {
+            document.getElementById("demo").innerHTML = numbers.reduce(getSum);
+        }
+
+        // 案例
+        function sum(arr) {
+            return arr.reduce((a,b)=>{
+                return a+b;
+            })
+        }
+    </script>
+</body>
+
+</html>
