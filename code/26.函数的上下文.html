@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的上下文</title>
+    <!-- 
+        将函数 fn 的执行上下文改为 obj 对象
+        （animal.showName.call(dog)），意思是把animal的方法放到dog上执行，
+        也可以说，把animal 的showName()方法放到 dog上来执行，所以this.name 应该是 dog。
+
+        教程举例：
+            function fruits() {}
+ 
+            fruits.prototype = {
+                color: "red",
+                say: function() {
+                console.log("My color is " + this.color);
+                    }
+            }
+            var apple = new fruits;
+            apple.say();    //My color is red
+            如果我们有一个对象banana= {color : "yellow"} ,
+            我们不想对它重新定义 say 方法，那么我们可以通过 call 或 apply 用 apple 的 say 方法：
+            banana = {color: "yellow"}  //对象
+            apple.say.call(banana);     //My color is yellow
+            apple.say.apply(banana);    //My color is yellow
+     -->
+</head>
+
+<body>
+    <script>
+        function speak(fn, obj) {
+            // 1 直接将fn挂载到obj对象上
+            obj.fn = fn
+            return obj.fn()
+            // 2
+            return fn.apply(obj)
+            // 3
+            return fn.call(obj)
+            // 4
+            return fn.bind(obj)
+        }
+    </script>
+</body>
+
+</html>
