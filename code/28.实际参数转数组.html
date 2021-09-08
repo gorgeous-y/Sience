@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实际参数转数组</title>
+
+    <!-- 
+        try {
+            tryCode - 尝试执行代码块
+        }
+        catch(err) {
+            catchCode - 捕获错误的代码块
+        }
+        finally {
+            finallyCode - 无论 try / catch 结果如何都会执行的代码块
+        }
+
+     -->
+</head>
+
+<body>
+    <script>
+        // 将函数的实际参数转换成数组的方法
+        //方法一：
+        var args = Array.prototype.slice.call(arguments);
+        //方法二：遍历
+        var args = [];
+        for (var i = 1; i < arguments.length; i++) {
+            args.push(arguments[i]);
+        }
+        //方法三 通用方法
+        var toArray = function (s) {
+            try {
+                return Array.prototype.slice.call(s);
+            } catch (e) {
+                var arr = [];
+                for (var i = 0, len = s.length; i < len; i++) {
+                    //arr.push(s[i]);
+                    arr[i] = s[i];  //据说这样比push快
+                }
+                return arr;
+            }
+        }
+    </script>
+</body>
+
+</html>

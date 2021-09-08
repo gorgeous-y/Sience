@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数柯里化</title>
+    <!-- 
+        实现函数 functionFunction，调用之后满足如下条件：
+            1、返回值为一个函数 f
+            2、调用返回的函数 f，返回值为按照调用顺序的参数拼接，
+                拼接字符为英文逗号加一个空格，即 ', '
+            3、所有函数的参数数量为 1，且均为 String 类型
+
+        考察函数柯里化，实际上是要求将一个字符串拼接函数进行柯里化。
+            柯里化：柯里化，
+                英语：Currying，
+                是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，
+                并且返回接受余下的参数而且返回结果的新函数的技术。
+        优势：
+            1 参数复用
+            2 提前确认
+            3 延迟运行
+        性能
+            1 存取arguments对象通常要比存取命名参数要慢一点
+            2 一些老版本的浏览器在arguments.length的实现上是相当慢的
+            3 使用fn.apply( … ) 和 fn.call( … )通常比直接调用fn( … ) 稍微慢点
+            4 创建大量嵌套作用域和闭包函数会带来花销，无论是在内存还是速度上
+        其实在大部分应用中，主要的性能瓶颈是在操作DOM节点上，
+        这js的性能损耗基本是可以忽略不计的，所以curry是可以直接放心的使用。
+     -->
+</head>
+
+<body>
+    <script>
+        // bug:当函数调用次数大于2时,改方法异常
+        function functionFunction(str) {
+            return f = function (arr) {
+                return str + ", " + arr;
+            }
+        }
+        //上述题目的解题
+        function functionFunction(str) {
+            //join 把数组的所有元素放入一个字符串。
+            /*
+                var fruits = ["Banana", "Orange", "Apple", "Mango"];
+                var energy = fruits.join(" and ");
+                输出结果：Banana and Orange and Apple and Mango
+                join 返回值是字符串
+
+                这里arr 为字符串 不能调用push方法会报错
+            */
+            var arr = Array.prototype.slice.call(arguments).join(', ');
+            
+            var temp = function (str) {
+                // join 是可以覆盖的
+                arr =[arr,Array.prototype.slice.call(arguments)].join(', ');
+                
+                return temp;
+            } 
+            temp.toString = function () {
+                return arr;
+                
+                
+            }
+            return temp;
+            console.log(typeof(temp))
+        }
+
+        
+        console.log(functionFunction('Hello')('world')('2')) 
+        
+
+
+        /* 
+        一道经典面试题 柯里化
+        */
+
+        // // 实现一个add方法，使计算结果能够满足如下预期：
+        // add(1)(2)(3) = 6;
+        // add(1, 2, 3)(4) = 10;
+        // add(1)(2)(3)(4)(5) = 15;
+
+        // function add() {
+        //     //    -prototype 属性允许您向对象添加属性和方法 全局属性
+        //     //    用法：object.prototype.name=value
+        //     //   将对象转换为数组，arguments是一个对象
+
+        //     // 第一次执行时，将传入的不定参数转换为数组对象
+        //     var _args = Array.prototype.slice.call(arguments);
+
+        //     // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+        //     var _adder = function () {
+        //         _args.push(...arguments);
+        //         // 实现延时传参 自己调用自己
+        //         return _adder; //返回的是函数 是 字符串的形式
+        //     };
+
+        //     // 利用toString隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+        //     // number.toString(radix) 把数字转换为字符串 
+        //     // 函数也是对象
+        //     _adder.toString = function () {
+        //         return _args.reduce(function (a, b) {
+        //             return a + b;
+        //         },0);
+        //     }
+        //     return _adder;
+        // }
+
+        // add(1)(2)(3)                // 6
+        // add(1, 2, 3)(4)             // 10
+        // add(1)(2)(3)(4)(5)          // 15
+        // add(2, 6)(1)                // 9
+
+    </script>
+</body>
+
+</html>
