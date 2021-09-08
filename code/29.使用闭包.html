@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 使用闭包</title>
-    <!--
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>使用闭包</title>
+		<!--
         闭包：  闭包是指有权访问另一个函数作用域中的变量的函数
         
               如果在函数func内部声明函数inner，
               然后在函数外部调用inner，这个过程即产生了一个闭包。
+              inner 可以读取func的局部变量 那么只要把inner这个函数作为返回值返回，外部就可以访问func的变量
              
+            闭包是一种保护私有变量的机制，在函数执行时形成私有的作用域，保护里面的私有变量不受外界干扰。
+            直观的说就是形成一个不销毁的栈环境。
 
         题目：
         实现函数 makeClosures，调用之后满足如下条件：
@@ -18,10 +21,53 @@
             2、运行 result 中第 i 个函数，
                 即 result[i]()，结果与 fn(arr[i]) 相同
      -->
-</head>
-<body>
-    <script>
+	</head>
 
-    </script>
-</body>
+	<body>
+		<script>
+			// 这种是错误的写法导致result中每个函数的参数都是arr[arr.length]
+			function makeClosures(arr, fn) {
+				var result = new Array();
+				for (var i = 0; i < arr.length; i++) {
+					result[i] = function () {
+						return fn(arr[i]);
+					};
+				}
+				return result;
+			}
+
+			//参考《JavaScript高级程序设计》的典型方法
+			function makeClosures(arr, fn) {
+				var result = new Array();
+				for (var i = 0; i < arr.length; i++) {
+					result[i] = (function (num) {
+						return function () {
+							return fn(num);
+						};
+					})(arr[i]);
+				}
+				return result;
+			}
+
+			//使用ES5的bind()方法
+			function makeClosures(arr, fn) {
+				var result = new Array();
+				for (var i = 0; i < arr.length; i++) {
+					result[i] = fn.bind(null, arr[i]);
+				}
+				return result;
+			}
+
+			//使用forEach()
+			function makeClosures(arr, fn) {
+				var result = new Array();
+				arr.forEach(function (curr) {
+					result.push(function () {
+						return fn(curr);
+					});
+				});
+				return result;
+			}
+		</script>
+	</body>
 </html>
