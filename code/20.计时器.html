@@ -14,19 +14,97 @@
             3、第一个数需要立即输出
         https://www.runoob.com/w3cnote/javascript-settimeout-usage.html
         setTimeout()
+            - 在指定的毫秒数后执行指定代码。
+        setTimeout(回调函数,时间,参数1,...,参数n)。
+
+       返回数值id，整型，可用于 取消 setTimeout 设置的函数clearTimeout(id)。
+       也就是这个setTimeout的唯一标示符。
+
+
+        setInterval()
+            - 间隔指定的毫秒数不停地执行指定的代码。
+        setInterval(code,millisec,lang)
+            code	必需。要调用的函数或要执行的代码串。
+            millisec	必须。周期性执行或调用 code 之间的时间间隔，以毫秒计。
+            lang	可选。 JScript | VBScript | JavaScript
+
+        定时器如果是由事件控制的，比如按钮的onclick控制的，
+        那么一定要遵循一个原则，先关后开。
+        这样可以避免连续点击多次按钮，重复设置定时器。
+        另外，clearInterval()不论里面填的是一个timer，还是null还是未定义，都可以顺利运行。
+
+        var timer = setTimeout(函数, 毫秒); 执行一次（炸弹） clearTimeout(timer);
+
+        区别：
+        setTimeout用于延迟执行某方法或功能
+        setInterval则一般用于刷新表单，对于一些表单的假实时指定时间刷新同步
      -->
-    
+
 </head>
 
 <body>
     <script>
-        function count(start, end) {
-            let i = start;
-            while (start<=i<=end) {
-                i++;
-                setTimeout("count(i,end)", 1000)
+        // setTimeout 
+
+        // // 方法一(一次性输出1，2，3，4，5) setTimeout(回调函数,时间,参数1,...,参数n)。
+        // setTimeout(function count(start,end){
+        //     // 循环
+        //     while (start<=end) {
+        //         console.log(start++);
+        //     }
+            
+        // }, 1000,1,5);
+        //方法二 setTimeout 字符串调用传参 参数在外部声明(逐次输出)
+        var start = 1
+        var end = 5
+        function count() {
+            if (start <= end) {
+                console.log(start++);
+                setTimeout("count()", 100);
             }
         }
+        count()
+
+        // 方法三 将函数调用放在一个匿名函数里直接传参
+       
+
+        // setInterval() 不满足题目需求 结果一样但是不满足要求
+        // function count(start, end) {
+        //     var timer = setInterval(() => {
+        //         if (start <= end) {
+        //             console.log(start++);
+        //         }
+        //         else {
+        //             clearInterval(timer);
+        //             //console.log('内部终止计时器')
+        //         }
+        //     }, 100);
+        //     return {
+        //         cancel() {
+        //             clearInterval(timer);
+        //             //console.log('外部终止计时器')
+        //         }
+        //     }
+        // }
+
+        // 题目要求的顺序进行
+        /* function count(start, end) {
+            console.log(start++)
+            var timer = setInterval(() => {
+                if (start <= end) {
+                    console.log(start++);
+                }
+                else {
+                    clearInterval(timer);
+                }
+            }, 100);
+            // 题目要求
+            return {
+                cancel() {
+                    clearInterval(timer);
+                }
+            }
+        } */
     </script>
 </body>
 

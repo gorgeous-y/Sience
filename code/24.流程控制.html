@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>流程控制</title>
+    <!-- 
+        实现 fizzBuzz 函数，参数 num 与返回值的关系如下：
+            1、如果 num 能同时被 3 和 5 整除，返回字符串 fizzbuzz
+            2、如果 num 能被 3 整除，返回字符串 fizz
+            3、如果 num 能被 5 整除，返回字符串 buzz
+            4、如果参数为空或者不是 Number 类型，返回 false
+            5、其余情况，返回参数 num
+     -->
 </head>
+
 <body>
-    
+    <script>
+        // 1
+        function fizzBuzz(num) {
+            if (!num || typeof num != "number") {
+                return false;
+            }
+            var res = "";
+            if (num % 3 == 0) {
+                res += "fizz";
+            }
+            if (num % 5 == 0) {
+                res += "buzz";
+            }
+            return res ? res : num;
+        }
+        // 2
+        function fizzBuzz(num) {
+            return num === undefined || typeof (num) !== 'number' ? false : (
+                // 先判断小的分支 否则会有交集
+                num % 3 === 0 && num % 5 === 0 ? "fizzbuzz" : (
+                    num % 3 === 0 ? 'fizz' : (
+                        num % 5 === 0 ? 'buzz' : num
+
+                    )
+                )
+            )
+        }
+    </script>
 </body>
+
 </html>
