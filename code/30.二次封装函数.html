@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>二次封装函数</title>
-	</head>
-	<body>
-		<script>
-			function partial(fn, str1, str2) {
-				// 1
-				var result = function (str3) {
-					return fn(str1, str2, str3);
-				};
-				return result;
 
-				// 2 匿名函数，默认this绑定global，与bind的第一个参数为this时效果一样。
-				return function result(str3) {
-					return fn(str1, str2, str3);
-				};
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>二次封装函数</title>
+	<!-- 
+		题目：
+		已知函数 fn 执行需要 3 个参数。请实现函数 partial，调用之后满足如下条件：
+		1、返回一个函数 result，该函数接受一个参数
+		2、执行 result(str3) ，返回的结果与 fn(str1, str2, str3) 一致
+	 -->
+</head>
 
-				// 3 call bind apply 改变作用域范围
-				function result(str3) {
-					return fn.bind(this, str1, str2)(str3);
-                    //
-                    return fn.bind(this, str1, str2);
-				}
+<body>
+	<script>
+		function partial(fn, str1, str2) {
+			// 1
+			var result = function (str3) {
+				return fn(str1, str2, str3);
+			};
+			return result;
 
-				return result;
+			// 2 匿名函数，默认this绑定global，与bind的第一个参数为this时效果一样。
+			return function result(str3) {
+				return fn(str1, str2, str3);
+			};
+
+			// 3 call bind apply 改变作用域范围
+				// call和apply必须显式地调用str3，立即执行
+				// bind不是立即执行，未传入str3时，并未执行，只是返回一个函数，等待参数传入
+				// this用于上下文不确定的情况
+			// 3.1 声明一个result函数
+			function result(str3) {
+				// A
+				return fn.bind(this, str1, str2)(str3);
+				//B
+				return fn.apply(this, [str1, str2, str3]);
 			}
-		</script>
-	</body>
+
+			return result;
+
+			//  3.2 不声明函数，直接利用bind生成函数
+			// 这个bind会生成一个新函数（对象）, 
+			//它的str1, str2参数都定死了, str3未传入, 一旦传入就会执行
+			return fn.bind(this, str1, str2);// 或 return fn.bind(null, str1, str2);
+
+			// ES6。this指向undefined. 箭头函数直接返回 
+			// (参数1, 参数2, …, 参数N) => 表达式(单一)    ！！！！不加{}和分号
+			// 相当于：(参数1, 参数2, …, 参数N) =>{ return 表达式; }
+			const partial = (fn, str1, str2) => str3 => fn(str1, str2, str3);
+
+		}
+	</script>
+</body>
+
 </html>

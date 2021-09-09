@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用arguments</title>
+    <!-- 
+            题目：
+            描述
+            函数 useArguments 可以接收 1 个及以上的参数。
+            请实现函数 useArguments，返回所有调用参数相加后的结果。
+            本题的测试参数全部为 Number 类型，不需考虑参数转换。
+
+            实例
+            输入：1, 2, 3, 4
+            输出：10
+
+        arguments只是类数组，并没有数组的一些方法，
+        所以可以将arguments转换成数组进行累加
+    arguments:
+        不是数组，但是类似数组，有length，也可以用下标找到其中的数据
+        当函数参数个数无法确定的时候，用arguments：
+     -->
+</head>
+
+<body>
+    <script>
+        function useArguments() {
+            //  1
+            var sum = 0;
+            for (let i = 0; i < arguments.length; i++) {
+               
+                sum = sum + arguments[i];
+            }
+            return sum
+
+            // 2 将类数组转换为数组
+
+            var arr = [...arguments];
+            // A 箭头函数的写法
+            return arr.reduce((a,b)=>{
+               return a+b;
+            })
+            // B
+            return arr.reduce((a,b)=>a+b)
+        }
+    </script>
+</body>
+
+</html>

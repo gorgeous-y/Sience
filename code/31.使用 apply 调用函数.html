@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用 apply 调用函数</title>
+    <!-- 
+        描述
+        实现函数 callIt，调用之后满足如下条件
+        1、返回的结果为调用 fn 之后的结果
+        2、fn 的调用参数为 callIt 的第一个参数之后的全部参数
+
+        示例
+        输入：无
+        输出：无
+
+     -->
+</head>
+
+<body>
+    <script>
+        function callIt(fn) {
+            // 将argument转换为数组后切片
+            var args = Array.prototype.slice.call(arguments, 1)
+
+            // 利用apply 是给函数用的
+            return fn.apply(this, args)
+        }
+
+        function callIt(fn) {
+            // 将argument转换为数组后切片
+            let r = [...arguments];
+            args = r.slice(1)
+            // 利用apply 是给函数用的
+            return fn.apply(this, args)
+        }
+
+        function callIt(fn) {
+            var args = [];
+            for (var i = 1; i < arguments.length; i++) {
+                args.push(arguments[i]);
+            }
+            var result = fn.apply(null, args);
+            return result;
+        }
+    </script>
+</body>
+
+</html>

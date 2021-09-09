@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二次封装函数2</title>
+    <!-- 
+    描述
+    实现函数 partialUsingArguments，调用之后满足如下条件：
+    1、返回一个函数 result
+    2、调用 result 之后，返回的结果与调用函数 fn 的结果一致
+    3、fn 的调用参数为 partialUsingArguments 的第一个参数之后的全部参数
+        以及 result 的调用参数
+     -->
+</head>
+
+<body>
+    <script>
+        // 1
+        function partialUsingArguments(fn) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            var result = function () {
+                // 这里不能直接apply中套用[...args,...arguments] 会报错
+                var arr = [...args, ...arguments];
+                return fn.apply(this, arr);
+            }
+            return result
+        }
+
+        // 2 不对？
+        function partialUsingArguments(fn) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            var result = function () {
+                // 如果写成args = [args, Array.prototype.slice.call(arguments, 0)];
+                // args 是一个对象 不是一个数组
+                args = [...args, ...Array.prototype.slice.call(arguments, 0)];
+                return fn.apply(this, args);
+            }
+            return result
+        }
+
+        // 3 
+        function partialUsingArguments(fn) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            var result = function () {
+                args.push(...arguments)
+                return fn.apply(this, args);
+            }
+            return result
+        }
+
+        // 4 
+        function partialUsingArguments(fn) {
+            let args1 = Array.prototype.slice.call(arguments, 1)
+            return function () {
+                // 或者let args2 = [...arguments]
+                let args2 = Array.prototype.slice.call(arguments, 0)
+                return fn.apply(this, args1.concat(args2))
+            }
+        }
+
+    </script>
+</body>
+
+</html>
