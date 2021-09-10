@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二进制转换</title>
+    <!-- 
+        描述
+        获取数字 num 二进制形式第 bit 位的值。注意：
+        1、bit 从 1 开始
+        2、返回 0 或 1
+        3、举例：2 的二进制为 10，第 1 位为 0，第 2 位为 1
+
+        示例：
+        输入：128, 8
+        输出：1
+
+
+        算法思路：
+        转换二进制的方法 toString() 和 parseInt() 
+            -number.toString(radix)  把数字转换为几进制字符串 
+
+                字符串返回指定位置的字符方法(string.charAt(index) 方法可返回指定位置的字符。)
+            -parseInt(string, radix) 转换为几进制数字 返回的是一个整数
+
+        注意：
+        string 类型的可以用下标索引 a[3]
+
+     -->
+</head>
+
+<body>
+    <script>
+        function valueAtBit(num, bit) {
+            var str = num.toString(2);
+            // 1
+            //return str.charAt(str.length-bit);
+            // 2
+            return str[str.length - bit];
+        }
+
+        // 位运算 注意&1的使用 1&1为1 0&1为0
+        // 左移右移 缺位补0
+        function valueAtBit(num, bit) {
+            return (num >> (bit - 1)) & 1
+        }
+
+        function valueAtBit(num, bit) {
+            //toString转化为二进制，split将二进制转化为数组，reverse()将数组颠倒顺序
+
+            // string.split(separator,limit) 将字符串切割为数组
+            var arr = num.toString(2).split("").reverse();
+            return arr[bit - 1];
+        }
+
+    </script>
+</body>
+
+</html>

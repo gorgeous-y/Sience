@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>正确的使用 parseInt</title>
+    <!-- 
+        示例1
+        输入：'12'
+        输出：12
+        示例2
+        输入：'12px'
+        输出：12
+        示例3
+        输入：'0x12'
+        输出：0
+
+     -->
     <!-- 
         parseInt() 函数可解析一个字符串，并返回一个整数。
             当参数 radix 的值为 0，或没有设置该参数时，
@@ -22,9 +35,13 @@
                 string 解析的字符串 radix 字符串基数 几进制
      -->
 </head>
+
 <body>
     <script>
-
+        function parse2Int(num) {
+            return parseInt(num);
+        }
     </script>
 </body>
+
 </html>

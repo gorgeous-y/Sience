@@ -11,16 +11,76 @@
         1、返回一个对象
         2、对象的 greeting 属性值等于 str1， name 属性值等于 str2
         3、对象存在一个 sayIt 方法，该方法返回的字符串为 greeting属性值 + ', ' + name属性值
+
+        考察内容：
+        创建对象：
+            1 使用 Object 定义并创建对象的实例。
+                // 以构造函数形式来调用
+                new Object([value])
+                -Object 构造函数创建一个对象包装器。
+
+                -Object 构造函数，会根据给定的参数创建对象
+                        -当以非构造函数形式被调用时，Object 的行为等同于 new Object()。
+            2 使用函数来定义对象，然后创建新的对象实例。
+            
+            
+            var obj = {};和var obj = new Object()
+        
+
+        如果 new 了函数内的 this 会指向当前这个 person 并且就算函数内部不 return 也会返回一个对象。
+        如果不 new 的话函数内的 this 指向的是 window。
      -->
 </head>
 
 <body>
     <script>
+        // 字面量模式
         function createModule(str1, str2) {
+            // 注意书写问题
+            // var obj =   后面return obj
             return {
-                geeting:
+                greeting: str1,
+                name: str2,
+                sayIt: function () {
+                    return this.greeting + ', ' + this.name
+                }
             }
         }
+
+        // 原型模式
+        function createModule(str1, str2) {
+            function Obj() {
+                this.greeting = str1;
+                this.name = str2;
+            }
+            Obj.prototype.sayIt = function () { return this.greeting + ", " + this.name; }
+            return new Obj();
+        }
+        // 构造函数模式
+        function createModule(str1, str2) {
+            function Obj() {
+                this.greeting = str1;
+                this.name = str2;
+                this.sayIt = function () { return this.greeting + ", " + this.name; }
+            }
+            return new Obj();
+        }
+
+        // 创建对象模式：
+        function createModule(str1, str2) {
+            function CreateObj() {
+                obj = new Object;
+                obj.greeting = str1;
+                obj.name = str2;
+                obj.sayIt = function () { return this.greeting + ", " + this.name; }
+                return obj;
+            }
+            return CreateObj();
+        }
+
+        
+
+
     </script>
 </body>
 
